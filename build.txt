@@ -1,0 +1,1 @@
+g++ main.cpp resource.res -o PulseInjector.exe -municode -lole32 -lcomdlg32 -lshlwapi -lpsapi -lgdi32 -mwindows
