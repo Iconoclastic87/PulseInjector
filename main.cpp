@@ -9,7 +9,7 @@
 #include "resource.h"
 
 #pragma comment(lib, "Shlwapi.lib")
-#pragma comment(lib, "comctl32.lib")  // Link common controls library
+#pragma comment(lib, "comctl32.lib")
 
 HWND hProcNameInput, hDllPathLabel;
 std::wstring selectedDllPath;
