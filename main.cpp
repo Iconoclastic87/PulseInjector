@@ -1,6 +1,6 @@
 #define UNICODE
 #include <windows.h>
-#include <commctrl.h>   // For common controls
+#include <commctrl.h>
 #include <tlhelp32.h>
 #include <commdlg.h>
 #include <string>
@@ -107,45 +107,45 @@ void OnInject(HWND hwnd) {
 LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     switch (msg) {
     case WM_CREATE: {
-        // Init common controls (required for some controls)
+        
         INITCOMMONCONTROLSEX icex = { sizeof(INITCOMMONCONTROLSEX), ICC_STANDARD_CLASSES };
         InitCommonControlsEx(&icex);
 
-        // Create Segoe UI 18pt font
+        
         HFONT hFont = CreateFontW(18, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
                                   DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS,
                                   CLEARTYPE_QUALITY, VARIABLE_PITCH, L"Segoe UI");
 
-        // Set dark background brush
+       
         HBRUSH hBackground = CreateSolidBrush(RGB(45, 45, 48));
         SetClassLongPtrW(hwnd, GCLP_HBRBACKGROUND, (LONG_PTR)hBackground);
 
-        // Label: Process Name
+        
         HWND hProcLabel = CreateWindowW(L"STATIC", L"Process Name", WS_VISIBLE | WS_CHILD,
                                        20, 15, 150, 28, hwnd, nullptr, nullptr, nullptr);
         SendMessageW(hProcLabel, WM_SETFONT, (WPARAM)hFont, TRUE);
 
-        // Process name edit box
+      
         hProcNameInput = CreateWindowW(L"EDIT", L"", WS_VISIBLE | WS_CHILD | WS_BORDER | ES_AUTOHSCROLL,
                                       20, 45, 480, 30, hwnd, nullptr, nullptr, nullptr);
         SendMessageW(hProcNameInput, WM_SETFONT, (WPARAM)hFont, TRUE);
 
-        // Label: DLL Path
+      
         HWND hDllLabel = CreateWindowW(L"STATIC", L"DLL Path", WS_VISIBLE | WS_CHILD,
                                       20, 85, 150, 28, hwnd, nullptr, nullptr, nullptr);
         SendMessageW(hDllLabel, WM_SETFONT, (WPARAM)hFont, TRUE);
 
-        // DLL path display label
+      
         hDllPathLabel = CreateWindowW(L"STATIC", L"No DLL selected", WS_VISIBLE | WS_CHILD | SS_LEFTNOWORDWRAP,
                                      20, 115, 480, 30, hwnd, nullptr, nullptr, nullptr);
         SendMessageW(hDllPathLabel, WM_SETFONT, (WPARAM)hFont, TRUE);
 
-        // Select DLL button
+        
         HWND hSelectDllBtn = CreateWindowW(L"BUTTON", L"Select DLL", WS_VISIBLE | WS_CHILD | BS_PUSHBUTTON,
                                            20, 155, 150, 40, hwnd, (HMENU)1, nullptr, nullptr);
         SendMessageW(hSelectDllBtn, WM_SETFONT, (WPARAM)hFont, TRUE);
 
-        // Inject button
+       
         HWND hInjectBtn = CreateWindowW(L"BUTTON", L"Inject DLL", WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,
                                        350, 155, 150, 40, hwnd, (HMENU)2, nullptr, nullptr);
         SendMessageW(hInjectBtn, WM_SETFONT, (WPARAM)hFont, TRUE);
